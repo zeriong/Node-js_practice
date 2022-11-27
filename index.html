@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>안녕 난 타이틀이야</title>
+</head>
+<body>
+<h1 id="sound"></h1>
+<form id="form">
+    <input id="name" type="text"/>
+    <input type="submit" onclick="getSound()" value="API 요청"/>
+</form>
+<script>
+    document.getElementById('form').addEventListener('submit',(e)=>{
+        e.preventDefault();
+        document.getElementById("name").value = "";
+    });
+    function getSound(){
+        const name = document.getElementById('name').value
+        fetch(`http://localhost:3000/sound/${name}`)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data.sound);
+                document.getElementById("sound").innerHTML = data.sound;
+            });
+    }
+</script>
+</body>
+</html>
